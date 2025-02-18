@@ -39,7 +39,7 @@ export const productTypes = defineType ({
         defineField({
             name: 'description',
             title: 'Description',
-            type: 'text',
+            type: 'blockContent',
         }),
 
         defineField({

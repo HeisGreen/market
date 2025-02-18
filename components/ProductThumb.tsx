@@ -5,6 +5,7 @@ import { imageUrl } from "@/lib/imageUrl";
 
 function ProductThumb({ product }: { product: Product }) {
   const isOutOfStock = product.stock != null && product.stock <= 0;
+  console.log(product.description);
 
   return (
     <Link
@@ -35,15 +36,22 @@ function ProductThumb({ product }: { product: Product }) {
           {product.name}
         </h2>
 
-        {/* <p className="mt-2 text-sm text-gray-600 line-clamp-2">
-          {product.description
-            ?.map((block) =>
-              block._type === "block"
-                ? block.children?.map((child) => child.text).join("")
-                : ""
-            )
-            .join("") || "No Description available"}
-        </p> */}
+        <p className="mt-2 text-sm text-gray-600 line-clamp-2">
+          {Array.isArray(product.description)
+            ? product.description
+                .map((block) =>
+                  block._type === "block"
+                    ? block.children?.map((child) => child.text).join("")
+                    : ""
+                )
+                .join("")
+            : typeof product.description === "string"
+              ? product.description
+              : "No Description available"}
+        </p>
+        <p className="mt-2 text-Ig font-bold Otext-gray-900">
+          ${product.price?.toFixed(2)}
+        </p>
       </div>
     </Link>
   );
